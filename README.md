@@ -44,3 +44,13 @@ Step 6: List of created topics
 
      -- List
      kafka-topics.sh --list --bootstrap-server localhost:9092
+
+Step 7: Send messages to the topic you created, open new cmd console
+
+     -- Send messages
+     python productor.py
+
+Step 8: Receive messages from the topic, open new cmd console
+
+     -- Receive consumidor
+     python productor.py
