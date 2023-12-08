@@ -3,5 +3,6 @@
 
 Step 1: Download the kafka docker image
 
-  --Download image
-  docker pull wurstmeister/kafka
+    --Download image
+    docker pull wurstmeister/kafka
+
