@@ -11,7 +11,7 @@ Step 2: Create a docker network
     --Docker network
     docker network create kafka-net
 
-Step 3: start a Zookeeper container (kafka dependency)
+Step 3: Start a Zookeeper container (kafka dependency)
 
     --Docker Zookeeper container
     docker run -d `
@@ -20,7 +20,7 @@ Step 3: start a Zookeeper container (kafka dependency)
      -p 2181:2181 `
      wurstmeister/zookeeper
 
-Step 4: start a Kafka container
+Step 4: Start a Kafka container
 
     --Docker Kafka container
     docker run -d `
@@ -34,4 +34,13 @@ Step 4: start a Kafka container
      -e KAFKA_INTER_BROKER_LISTENER_NAME=PLAINTEXT `
      wurstmeister/kafka
 
-     
+Step 5: In PowerShell run the following command to create a topic
+
+     --Create topic
+     docker exec -it kafka bash
+     kafka-topics.sh --create --topic test-topic --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
+
+Step 6: List of created topics
+
+     -- List
+     kafka-topics.sh --list --bootstrap-server localhost:9092
