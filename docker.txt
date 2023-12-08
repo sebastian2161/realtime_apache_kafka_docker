@@ -1,0 +1,25 @@
+docker pull wurstmeister/kafka
+docker network create kafka-net
+$ZOOKEEPER_IP = docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' zookeeper
+
+docker run -d `
+  --name zookeeper `
+  --network kafka-net `
+  -p 2181:2181 `
+  wurstmeister/zookeeper
+
+docker run -d `
+  --name kafka `
+  --network kafka-net `
+  -p 9092:9092 `
+  -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092 `
+  -e KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT `
+  -e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 `
+  -e KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 `
+  -e KAFKA_INTER_BROKER_LISTENER_NAME=PLAINTEXT `
+  wurstmeister/kafka
+
+
+docker exec -it kafka bash
+kafka-topics.sh --create --topic test-topic --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
+kafka-topics.sh --list --bootstrap-server localhost:9092
