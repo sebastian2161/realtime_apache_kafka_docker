@@ -52,5 +52,24 @@ Step 7: Send messages to the topic you created, open new cmd console
 
 Step 8: Receive messages from the topic, open new cmd console
 
-     -- Receive consumidor
-     python productor.py
+     -- Receive messages
+     python consumidor.py
+
+
+# Technical specifications
+
+The python version used was 3.9, in a virtual environment using the following steps:
+
+    --Create a directory for the virtual environment
+    mkdir venv
+    
+    --Enter the virtual environment directory
+    cd venv
+
+    --Create the virtual environment
+     python -m venv myenv
+
+install the Kafka library for Python:
+
+    --Install the Kafka library 
+    pip install confluent_kafka
